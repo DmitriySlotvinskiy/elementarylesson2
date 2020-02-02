@@ -8,7 +8,7 @@ public class IntArrayList implements IntList {
     private int size = 0;
     private int[] elementData = new int[DEFAULT_SIZE];
 
-    public IntArrayList (int[] elementData) {
+    public IntArrayList(int[] elementData) {
         this.size = elementData.length;
         System.arraycopy(elementData, 0, this.elementData, 0, this.size);
     }
