@@ -56,9 +56,7 @@ public class IntArrayList implements IntList {
 
     @Override
     public boolean add(int element) {
-        if (elementData.length <= size + 1) {
-            increaseElementData();
-        }
+        checkIsEnoughCapacity();
         elementData[size] = element;
         size++;
         return true;
@@ -67,18 +65,18 @@ public class IntArrayList implements IntList {
     @Override
     public void add(int index, int element) {
         throwExceptionIfIndexOut(index);
-        if (elementData.length <= size + 1) {
-            increaseElementData();
-        }
+        checkIsEnoughCapacity();
         System.arraycopy(elementData, index, elementData, index + 1, size - index);
         this.set(index, element);
         size++;
     }
 
-    private void increaseElementData() {
-        int[] tmpArray = new int[elementData.length * 3 / 2 + 1];
-        System.arraycopy(elementData, 0, tmpArray, 0, size);
-        elementData = tmpArray;
+    private void checkIsEnoughCapacity() {
+        if (elementData.length <= size + 1) {
+            int[] tmpArray = new int[elementData.length * 3 / 2 + 1];
+            System.arraycopy(elementData, 0, tmpArray, 0, size);
+            elementData = tmpArray;
+        }
     }
 
     @Override
